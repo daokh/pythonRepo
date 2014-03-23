@@ -1,6 +1,7 @@
 __author__ = 'daokh'
 from abc import ABCMeta, abstractmethod
 
+
 class Sender(object):
     def __init__(self):
         self.observers = list()
@@ -18,14 +19,13 @@ class Sender(object):
 
     def update(self, event):
         for observer in self.observers:
-                observer.notify(event)
-
+            observer.notify(event)
 
 
 class Observer(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
 
     @abstractmethod
@@ -34,13 +34,11 @@ class Observer(object):
 
 
 class MPObserver(Observer):
-
     def notify(self, event):
         print '-->{name} executing {event}'.format(name=self.name, event=event)
 
 
 if __name__ == '__main__':
-
     sender = Sender()
     observer1 = MPObserver('observer1')
     sender.register(observer1)

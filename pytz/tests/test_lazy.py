@@ -10,12 +10,11 @@ if __name__ == '__main__':
     # the paths already
     sys.path.insert(0, os.path.abspath(os.path.join(os.pardir, os.pardir)))
 
-
 from pytz.lazy import LazyList, LazySet
 
 
 class LazyListTestCase(unittest.TestCase):
-    initial_data = [3,2,1]
+    initial_data = [3, 2, 1]
 
     def setUp(self):
         self.base = [3, 2, 1]
@@ -185,7 +184,7 @@ class LazyListTestCase(unittest.TestCase):
 
 
 class LazySetTestCase(unittest.TestCase):
-    initial_data = set([3,2,1])
+    initial_data = set([3, 2, 1])
 
     def setUp(self):
         self.base = set([3, 2, 1])
@@ -309,5 +308,5 @@ class LazySetTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    warnings.simplefilter("error") # Warnings should be fatal in tests.
+    warnings.simplefilter("error")  # Warnings should be fatal in tests.
     unittest.main()

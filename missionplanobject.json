@@ -1,0 +1,27 @@
+{
+    "id": -88,
+    "shortName": "She also portrays \"tree-like organic motifs\" and representations of hair-string skirts (nyimparra).",
+    "description": "Between these occasions, her great nephew, King Edward VIII, abdicated on 11 December 1936.",
+    "BACNTailNumber": "Sexual dimorphism is much less marked in the southern pintails, with the male's breeding appearance being similar to the female plumage.",
+    "missionPlanElements": [
+        {
+            "action": "create",
+            "id": 64,
+            "scheduleTrigger": {
+                "delta": 50,
+                "triggerDate": "1978-06-02T02:23:24.585Z"
+            },
+            "commPlanIDs": [
+                12,
+                23,
+                33
+            ],
+            "Notifications": [
+                {
+                    "title": "Cotton Tiberius Aiii, f.",
+                    "notificationText": "The Hwicce had their own royal family, but it appears that at this date they were already subordinate to Wulfhere: the marriage between Æthelwealh and Eafe may well have taken place at Wulfhere's court, since it is known Æthelwealh was converted there."
+                }
+            ]
+        }
+    ]
+}

@@ -1,4 +1,5 @@
 from threading import RLock
+
 try:
     from UserDict import DictMixin
 except ImportError:
@@ -13,6 +14,7 @@ _fill_lock = RLock()
 class LazyDict(DictMixin):
     """Dictionary populated on first use."""
     data = None
+
     def __getitem__(self, key):
         if self.data is None:
             _fill_lock.acquire()
@@ -100,6 +102,7 @@ class LazyList(list):
                 finally:
                     _fill_lock.release()
                 return getattr(list, name)(self, *args, **kw)
+
             return _lazy
 
         for name in cls._props:
@@ -154,6 +157,7 @@ class LazySet(set):
                 finally:
                     _fill_lock.release()
                 return getattr(set, name)(self, *args, **kw)
+
             return _lazy
 
         for name in cls._props:

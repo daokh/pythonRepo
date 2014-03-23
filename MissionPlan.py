@@ -9,6 +9,7 @@ class Trigger:
         self.id = id
         self.triggertype = triggertype
         Trigger.tgCount += 1
+
     def displaytrigger(self):
         print "TriggerType : ", self.triggertype, ", id: ", self.id
 
@@ -24,9 +25,8 @@ class MissionPlan:
         MissionPlan.mpCount += 1
         self.trigger = None
 
-    def settrigger(self,trigger):
+    def settrigger(self, trigger):
         self.trigger = trigger
-
 
 
     def displaycount(self):
@@ -39,7 +39,7 @@ class MissionPlan:
 def jdefault(o):
     if isinstance(o, set):
         return list(o)
-    elif isinstance(o,MissionPlan):
+    elif isinstance(o, MissionPlan):
         mpdict = o.__dict__
         mpdict.update({'id': o.id})
         return mpdict
@@ -49,8 +49,8 @@ def jdefault(o):
 ###############################################################################3
 #Testing
 
-mp1 = MissionPlan(1,"This is long name of MP","mp1")
-trigger = Trigger(2,"GeoFence")
+mp1 = MissionPlan(1, "This is long name of MP", "mp1")
+trigger = Trigger(2, "GeoFence")
 mp1.settrigger(trigger)
 
 print json.dumps(mp1, default=jdefault)

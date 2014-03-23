@@ -1,6 +1,7 @@
 __author__ = 'daokh'
 from abc import ABCMeta, abstractmethod
 
+
 class Sender(object):
     def __init__(self):
         self.events = dict()
@@ -27,24 +28,20 @@ class Sender(object):
                 observer.notify(event)
 
 
-
 class Observer(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def say_something(self):
-          return "I'm an animal!"
+        return "I'm an animal!"
 
     @abstractmethod
     def notify(self, event):
         print '{name} executing {event}'.format(name=self.name, event=event)
 
 
-
-
 class MPObserver(Observer):
-
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
 
     def say_something(self):
@@ -56,8 +53,7 @@ class MPObserver(Observer):
 
 
 class MPObserver2(Observer):
-
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
 
     def say_something(self):
@@ -67,18 +63,18 @@ class MPObserver2(Observer):
     def notify(self, event):
         print '***{name} executing {event}'.format(name=self.name, event=event)
 
+
 if __name__ == '__main__':
     c = MPObserver("meo")
     c.say_something()
     c.notify("event1")
 
-
     sender = Sender()
     observer1 = MPObserver('observer1')
-    sender.register(observer1,'event1')
+    sender.register(observer1, 'event1')
     observer2 = MPObserver2('observer2')
-    sender.register(observer1,'event1')
-    sender.register(observer2,'event1')
+    sender.register(observer1, 'event1')
+    sender.register(observer2, 'event1')
     sender.update('event1')
 
 
