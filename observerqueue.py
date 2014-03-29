@@ -59,7 +59,7 @@ class Observer(object):
         raise NotImplementedError()
 
 
-class ObseverQueue(Thread,Observer):
+class ObseverQueue(Sender,Observer):
 
     _condition = Condition()
     _queue = []
@@ -70,8 +70,9 @@ class ObseverQueue(Thread,Observer):
             self._condition.acquire()
             if not self._queue:
                 print "Nothing in queue, consumer is waiting"
-                condition.wait()
-            num = queue.pop(0)
+                self._condition.wait()
+            num = self._queue.pop(0)
+            print "observerqueue nofify %i" %num
             self._condition.notify()
             self._condition.release()
 
@@ -79,6 +80,7 @@ class ObseverQueue(Thread,Observer):
             self.notifyObservers(num)
 
     def update(self, eventObj):
+        print "observerqueue update %i" %eventObj
         self._condition.acquire()
         self._queue.append(eventObj)
         self._condition.notify()
