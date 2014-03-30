@@ -5,6 +5,8 @@ from threading import Thread, Condition
 import time
 import random
 
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger(__name__)
 
 condition = Condition()
 queue = []
@@ -26,7 +28,6 @@ class Sender(Thread):
             return False
 
     def unregister(self, observer):
-
         if observer in self.observers:
             return self.observers.remove(observer)
 
@@ -35,17 +36,13 @@ class Sender(Thread):
             observer.update(eventObj)
 
     def run(self):
-        nums = range(5)
+        nums = range(10)
         global queue
         while True:
-
             num = random.choice(nums)
-
-            print("Produced %i"%num)
+            logger.debug("Produced %i"%num)
             self.notifyObservers(num)
-            time.sleep(random.random())
-
-
+            time.sleep(5)
 
 
 class Observer(object):
@@ -69,33 +66,35 @@ class ObseverQueue(Sender,Observer):
         while True:
             self._condition.acquire()
             if not self._queue:
-                print "Nothing in queue, consumer is waiting"
+                logger.debug("Nothing in queue, waiting for udpate")
                 self._condition.wait()
             num = self._queue.pop(0)
-            print "observerqueue nofify %i" %num
+            logger.debug ("observerqueue got %i" %num)
             self._condition.notify()
             self._condition.release()
-
-
             self.notifyObservers(num)
 
+            time.sleep(15)
+
     def update(self, eventObj):
-        print "observerqueue update %i" %eventObj
+        logger.debug("observerqueue update %i" %eventObj)
         self._condition.acquire()
         self._queue.append(eventObj)
+
+        logger.debug("total queues is %i and queue is %s" %(len(self._queue), self._queue)  )
         self._condition.notify()
         self._condition.release()
 
 
 class MPObserver(Observer):
     def update(self, eventObj):
-        print '-->{name} executing {event}'.format(name=self.name, event=eventObj)
+        print '-->{name} processes {event}'.format(name=self.name, event=eventObj)
 
 
 if __name__ == '__main__':
+
     sender = Sender()
     mpObserver = MPObserver('observer1')
-
     observerQueue = ObseverQueue()
     observerQueue.register(mpObserver)
 
