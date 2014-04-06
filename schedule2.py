@@ -25,6 +25,8 @@ print "Now:",now_str()
 
 t2 = dt.now(timezone("America/Los_Angeles")) + datetime.timedelta(seconds=10)
 
+
+
 t3 = dt.now() + datetime.timedelta(seconds=15)
 print "t2",t3.strftime("%H:%M:%S")
 print "t3",t3.strftime("%H:%M:%S")
@@ -32,7 +34,7 @@ epoch=time.mktime(t3.timetuple())
 
 los=dateutils.to_iso8601()
 t4=dateutils.from_iso8601(los)
-t5=t4+datetime.timedelta(seconds=10)
+t5=t4+datetime.timedelta(seconds=5)
 
 
 print "epochtime T2:",time.mktime(t3.timetuple())
@@ -61,22 +63,20 @@ if __name__ == '__main__':
     sched = Scheduler()
 
 
-    # The job will be executed on November 6th, 2009
-    exec_date = date(2009, 11, 6)
-
     # Store the job in a variable in case we want to cancel it
-    job = sched.add_date_job(print_event, t5, ['text'])
+    job = sched.add_date_job(print_event, t5, ['text---->'])
 
     sched.start()
-    scheduler.enter(20, 2, print_event, ('first',))
-    print "scheduler queue:%s"%scheduler.queue
-    scheduler.enter(3, 1, print_event, ('second',))
 
     while True:
-        time.sleep(1)
-        print 'Time--->:', time.time()
-        print "scheduler queue:%s"%scheduler.queue
-        print "Current date & time " + time.strftime("%c")
-        if scheduler.empty():
-            break
+        print('This is the main thread.')
+        print('schedule list:'),sched.print_jobs()
+        time.sleep(2)
+    # while True:
+    #     time.sleep(1)
+    #     print 'Time--->:', time.time()
+    #     print "scheduler queue:%s"%sched.
+    #     print "Current date & time " + time.strftime("%c")
+    #     if scheduler.empty():
+    #         break
 
