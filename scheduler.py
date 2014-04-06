@@ -56,8 +56,6 @@ def print_event(mp):
 
 
 def runschedule(scheduler):
-
-
     scheduler.run()
 
 
@@ -75,6 +73,7 @@ if __name__ == '__main__':
     print "scheduler queue:%s"%scheduler.queue
     thread = threading.Thread(target=runschedule,args=(scheduler,) )
     thread.start()
+
     while True:
         time.sleep(1)
         print 'Time--->:', time.time()

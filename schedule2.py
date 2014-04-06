@@ -23,7 +23,7 @@ def now_str():
 
 print "Now:",now_str()
 
-t2 = dt.now(timezone("America/Los_Angeles")) + datetime.timedelta(seconds=10)
+t2 = dt.now(timezone("UTC")) + datetime.timedelta(seconds=10)
 
 
 
@@ -49,7 +49,7 @@ print t3.strftime('%z')
 
 
 def print_event(name):
-    print 'Excute:', time.time(), name
+    print 'Execute Schedule---->>>>>:', time.time(), name
 
 
 
@@ -64,7 +64,9 @@ if __name__ == '__main__':
 
 
     # Store the job in a variable in case we want to cancel it
-    job = sched.add_date_job(print_event, t5, ['text---->'])
+    job = sched.add_date_job(print_event, t5, ['T5---->'])
+    job = sched.add_date_job(print_event, t2, ['T2---->'])
+
 
     sched.start()
 

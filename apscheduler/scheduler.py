@@ -15,7 +15,7 @@ from apscheduler.jobstores.ram_store import RAMJobStore
 from apscheduler.job import Job, MaxInstancesReachedError
 from apscheduler.events import *
 from apscheduler.threadpool import ThreadPool
-
+from pytz import timezone
 logger = getLogger(__name__)
 
 
@@ -241,7 +241,7 @@ class Scheduler(object):
                     logger.exception('Error notifying listener')
 
     def _real_add_job(self, job, jobstore, wakeup):
-        job.compute_next_run_time(datetime.now())
+        job.compute_next_run_time(datetime.now(timezone("utc")))
         if not job.next_run_time:
             raise ValueError('Not adding job since it would never be run')
 
@@ -486,7 +486,7 @@ class Scheduler(object):
         for run_time in run_times:
             # See if the job missed its run time window, and handle possible
             # misfires accordingly
-            difference = datetime.now() - run_time
+            difference = datetime.now(timezone("utc")) - run_time
             grace_time = timedelta(seconds=job.misfire_grace_time)
             if difference > grace_time:
                 # Notify listeners about a missed run
@@ -577,7 +577,7 @@ class Scheduler(object):
         self._wakeup.clear()
         while not self._stopped:
             logger.debug('Looking for jobs to run')
-            now = datetime.now()
+            now = datetime.now(timezone("utc"))
             next_wakeup_time = self._process_jobs(now)
 
             # Sleep until the next job is scheduled to be run,
