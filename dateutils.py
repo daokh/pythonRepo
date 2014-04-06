@@ -86,6 +86,15 @@ def local_time_offset(t=None):
         return -time.timezone
 
 
+def make_tz_aware(dt, tz='UTC'):
+    """Add timezone information to a datetime object, only if it is naive."""
+    tz = dt.tzinfo or tz
+    try:
+        tz = pytz.timezone(tz)
+    except AttributeError:
+        pass
+    return tz.localize(dt)
+
 if __name__ == '__main__':
 
     #Convert current time and UTC to sio8601
@@ -118,3 +127,8 @@ if __name__ == '__main__':
     print "Convert utc back to los angeles"
     losobj = utc_to_local(utcobj,pytz.timezone("America/Los_Angeles"))
     print losobj
+
+    now=datetime.now(pytz.timezone("UTC"))
+    now=make_tz_aware(now)
+    print
+
