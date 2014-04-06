@@ -28,6 +28,7 @@ t2 = dt.now(timezone("UTC")) + datetime.timedelta(seconds=10)
 
 
 t3 = dt.now() + datetime.timedelta(seconds=15)
+t3=dateutils.make_tz_aware(t3)
 print "t2",t3.strftime("%H:%M:%S")
 print "t3",t3.strftime("%H:%M:%S")
 epoch=time.mktime(t3.timetuple())
@@ -66,7 +67,7 @@ if __name__ == '__main__':
     # Store the job in a variable in case we want to cancel it
     job = sched.add_date_job(print_event, t5, ['T5---->'])
     job = sched.add_date_job(print_event, t2, ['T2---->'])
-
+    job = sched.add_date_job(print_event, t2, ['T3---->'])
 
     sched.start()
 
