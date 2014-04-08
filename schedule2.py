@@ -2,9 +2,6 @@ __author__ = 'kdao'
 
 
 from apscheduler.scheduler import Scheduler
-from apscheduler.jobstores.shelve_store import ShelveJobStore
-
-import sys
 import sched
 import time
 from datetime import datetime as dt
@@ -12,31 +9,34 @@ import datetime
 import dateutils
 from pytz import timezone
 from time import gmtime, strftime
-import threading
+import pytz
 
 def now_str():
     """Return hh:mm:ss string representation of the current time."""
     t = dt.now(timezone("America/Los_Angeles"))
     return t.strftime("%Y-%m-%d--%H:%M:%S")
 
-#t3 = dt.combine(dt.now() + datetime.timedelta(seconds=10), datetime.time(0, 0))
+#t = dt.combine(dt.now() + datetime.timedelta(seconds=10), datetime.time(0, 0))
 
 print "Now:",now_str()
 
-t2 = dt.now(timezone("UTC")) + datetime.timedelta(seconds=10)
+t1 = dt.now(timezone("UTC")) + datetime.timedelta(seconds=5)
 
+t2 = dt.now() + datetime.timedelta(seconds=10)
+t2=dateutils.naive_to_local(t2,"America/Los_Angeles")
 
+utc=dateutils.to_iso8601(None,pytz.utc)
+t3=dateutils.from_iso8601()+ datetime.timedelta(seconds=10)
 
-t3 = dt.now() + datetime.timedelta(seconds=15)
-t3=dateutils.make_tz_aware(t3)
-print "t2",t3.strftime("%H:%M:%S")
-print "t3",t3.strftime("%H:%M:%S")
+print "t1",t1.strftime("%Y-%m-%d--%H:%M:%S")
+print "t2",t2.strftime("%Y-%m-%d--%H:%M:%S")
+print "t3",t3.strftime("%Y-%m-%d--%H:%M:%S")
 epoch=time.mktime(t3.timetuple())
 
 los=dateutils.to_iso8601()
 t4=dateutils.from_iso8601(los)
-t5=t4+datetime.timedelta(seconds=5)
-
+t5=t4+datetime.timedelta(seconds=15)
+print "t5",t5.strftime("%Y-%m-%d--%H:%M:%S")
 
 print "epochtime T2:",time.mktime(t3.timetuple())
 print "epochtime T3:",time.mktime(t3.timetuple())
@@ -65,9 +65,10 @@ if __name__ == '__main__':
 
 
     # Store the job in a variable in case we want to cancel it
-    job = sched.add_date_job(print_event, t5, ['T5---->'])
+    job = sched.add_date_job(print_event, t1, ['T1---->'])
     job = sched.add_date_job(print_event, t2, ['T2---->'])
-    job = sched.add_date_job(print_event, t2, ['T3---->'])
+    job = sched.add_date_job(print_event, t3, ['T3---->'])
+    job = sched.add_date_job(print_event, t5, ['T5---->'])
 
     sched.start()
 

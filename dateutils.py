@@ -37,8 +37,8 @@ def to_iso8601(when=None, tz=PDT):
     else: #UTC time then just add the Z
         _when = when.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        _when = when.strftime("%Y-%m-%dT%H:%M:%S%z")
-        _when=_when[:-2] + ":"+_when[-2:]
+        # _when = when.strftime("%Y-%m-%dT%H:%M:%S%z")
+        # _when=_when[:-2] + ":"+_when[-2:]
 
     return _when
 
@@ -46,6 +46,8 @@ def to_iso8601(when=None, tz=PDT):
 #-----------------------------------------------
 def from_iso8601(when=None, tz=PDT):
     """Convert the time from iso8601 to time object"""
+    if not when:
+       when= to_iso8601(None,pytz.utc)
 
     _when = dateutil.parser.parse(when)
     if _when.tzinfo==dateutil.tz.tzutc():
@@ -86,14 +88,34 @@ def local_time_offset(t=None):
         return -time.timezone
 
 
-def make_tz_aware(dt, tz='UTC'):
-    """Add timezone information to a datetime object, only if it is naive."""
     tz = dt.tzinfo or tz
     try:
         tz = pytz.timezone(tz)
     except AttributeError:
         pass
+    dt = tz.localize(dt)
+    dt = dt.astimezone(pytz.UTC)
     return tz.localize(dt)
+
+
+def naive_to_local(dt, tz_name):
+    """Shortcut for tz = pytz.timezone(tz_name); tz.normalize(tz.localize(dt)).
+    """
+    tz = pytz.timezone(tz_name)
+    return tz.normalize(tz.localize(dt))
+
+def naive_to_utc(dt, tz_name):
+    """Converts naive (w/o tzinfo) datetime object to UTC time.
+
+    `tz_name` must be a symbolic name of time zone of `dt`, e.g. 'Europe/Moscow'.
+    Use `os.environ['TZ']` if unsure.
+
+    Shortcut for `naive_to_local(dt, tz_name).astimezone(pytz.utc)` with `dt.tzinfo` check.
+    """
+    if dt.tzinfo is not None:
+        raise ValueError(u"dt argument MUST be naive datetime (w/o tzinfo). To convert TZ-aware datetime, use local_to_utc.")
+    return naive_to_local(dt, tz_name).astimezone(pytz.utc)
+
 
 if __name__ == '__main__':
 
@@ -108,7 +130,7 @@ if __name__ == '__main__':
     #Convert iso8601 back to time object
     print "Convert iso8601 back to time object"
     losobj=from_iso8601(los)
-    eastobj=from_iso8601(east)
+    eastobj=from_iso8601(east,pytz.timezone("US/Eastern"))
     utcobj = from_iso8601(utc,)
     print "from los iso8601:", losobj
     print "from utc iso8601:", utcobj
@@ -128,7 +150,11 @@ if __name__ == '__main__':
     losobj = utc_to_local(utcobj,pytz.timezone("America/Los_Angeles"))
     print losobj
 
-    now=datetime.now(pytz.timezone("UTC"))
-    now=make_tz_aware(now)
-    print
+
+    now=datetime.now()
+    print "now-->",now
+    naive_to_local
+    now=naive_to_utc(now,"America/Los_Angeles")
+
+    print "tz_aware-->",now
 
