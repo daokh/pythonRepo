@@ -10,6 +10,11 @@ import dateutils
 from pytz import timezone
 from time import gmtime, strftime
 import pytz
+import logging,logging.config
+
+
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger(__name__)
 
 def now_str():
     """Return hh:mm:ss string representation of the current time."""
@@ -63,18 +68,19 @@ if __name__ == '__main__':
     # Start the scheduler
     sched = Scheduler()
 
-
+    sched.start()
     # Store the job in a variable in case we want to cancel it
     job = sched.add_date_job(print_event, t1, ['T1---->'])
     job = sched.add_date_job(print_event, t2, ['T2---->'])
     job = sched.add_date_job(print_event, t3, ['T3---->'])
     job = sched.add_date_job(print_event, t5, ['T5---->'])
 
-    sched.start()
+    print('schedule list--->:'),sched.get_jobs()
 
     while True:
-        print('This is the main thread.')
-        print('schedule list:'),sched.print_jobs()
+        logger.info('This is the main thread.')
+        #print('schedule list:'),sched.print_jobs()
+        logger.info(sched.get_jobs())
         time.sleep(2)
     # while True:
     #     time.sleep(1)
