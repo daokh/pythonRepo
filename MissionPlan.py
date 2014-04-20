@@ -103,3 +103,15 @@ print(json.dumps(mpobj, default=serialize_object))
 
 
 
+    # def decode_from_dict(self, cls, vals):
+    #     #obj = cls()
+    #     obj = cls
+    #     for key, val in vals.items():
+    #         print obj, key, val
+    #         setattr(obj, key, val)
+    #     return obj
+    #
+    # def decode_object(self,d):
+    #     blah = CurriculumOrderItemModel()
+    #     return self.decode_from_dict(blah, d)
+
