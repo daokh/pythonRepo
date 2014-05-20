@@ -5,6 +5,7 @@ import time
 import pytz
 import dateutil.parser
 from datetime import datetime, timedelta
+import re
 
 #-----------------------------------------------
 utc = pytz.utc
@@ -16,8 +17,12 @@ HOUR = timedelta(hours=1)
 utcdatetime=datetime.now(utc)
 utcdelta=utcdatetime.utcoffset()
 
+DATE_PART='\d\d\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])T'
+TIME_PART='^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$'
+
+
 #-----------------------------------------------
-def to_iso8601(when=None, tz=PDT):
+def to_iso8601(when=None, tz=utc):
     """Convert time object to iso8601, by default use current time"""
     #contruct utc time for comparison
 
@@ -44,10 +49,16 @@ def to_iso8601(when=None, tz=PDT):
 
 
 #-----------------------------------------------
-def from_iso8601(when=None, tz=PDT):
+def from_iso8601(when=None, tz=utc):
     """Convert the time from iso8601 to time object"""
+    currentutc = to_iso8601(None,pytz.utc)
+
     if not when:
-       when= to_iso8601(None,pytz.utc)
+       when = currentutc
+
+    #if the string is time only, append it to the current utc date part
+    if not re.compile(DATE_PART).match(when):
+        when = currentutc[:currentutc.find('T')+1] + when
 
     _when = dateutil.parser.parse(when)
     if _when.tzinfo==dateutil.tz.tzutc():
@@ -121,7 +132,7 @@ if __name__ == '__main__':
 
     #Convert current time and UTC to sio8601
     print "Convert current time and UTC to iso8601"
-    los=to_iso8601()
+    los=to_iso8601(None,pytz.timezone("America/Los_Angeles"))
     east=to_iso8601(None,pytz.timezone("US/Eastern"))
     utc = to_iso8601(None, pytz.timezone("UTC"))
     print "los angeles iso8601:", los
@@ -129,7 +140,7 @@ if __name__ == '__main__':
 
     #Convert iso8601 back to time object
     print "Convert iso8601 back to time object"
-    losobj=from_iso8601(los)
+    losobj=from_iso8601(los,PDT)
     eastobj=from_iso8601(east,pytz.timezone("US/Eastern"))
     utcobj = from_iso8601(utc,)
     print "from los iso8601:", losobj
@@ -158,3 +169,9 @@ if __name__ == '__main__':
 
     print "tz_aware-->",now
 
+
+
+    #t = datetime.strptime("21:49:30Z", '%H:%M:%SZ')
+
+    #time only..return the current utc + time
+    print "Time only: %s"%from_iso8601("05:07:42Z")
