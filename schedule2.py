@@ -1,4 +1,4 @@
-from timeexamples import dateutils
+from dtexamples import dateutils
 
 __author__ = 'kdao'
 
