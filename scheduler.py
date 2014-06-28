@@ -1,11 +1,11 @@
+from timeexamples import dateutils
+
 __author__ = 'kdao'
 
-import sys
 import sched
 import time
 from datetime import datetime as dt
 import datetime
-import dateutils
 from pytz import timezone
 from time import gmtime, strftime
 import threading
@@ -26,8 +26,8 @@ print "t2",t3.strftime("%H:%M:%S")
 print "t3",t3.strftime("%H:%M:%S")
 epoch=time.mktime(t3.timetuple())
 
-los=dateutils.to_iso8601()
-t4=dateutils.from_iso8601(los)
+los= dateutils.to_iso8601()
+t4= dateutils.from_iso8601(los)
 t5=t4+datetime.timedelta(seconds=10)
 
 

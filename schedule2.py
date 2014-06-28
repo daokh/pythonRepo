@@ -1,3 +1,5 @@
+from timeexamples import dateutils
+
 __author__ = 'kdao'
 
 
@@ -6,7 +8,6 @@ import sched
 import time
 from datetime import datetime as dt
 import datetime
-import dateutils
 from pytz import timezone
 from time import gmtime, strftime
 import pytz
@@ -28,18 +29,18 @@ print "Now:",now_str()
 t1 = dt.now(timezone("UTC")) + datetime.timedelta(seconds=5)
 
 t2 = dt.now() + datetime.timedelta(seconds=10)
-t2=dateutils.naive_to_local(t2,"America/Los_Angeles")
+t2= dateutils.naive_to_local(t2,"America/Los_Angeles")
 
-utc=dateutils.to_iso8601(None,pytz.utc)
-t3=dateutils.from_iso8601()+ datetime.timedelta(seconds=10)
+utc= dateutils.to_iso8601(None,pytz.utc)
+t3= dateutils.from_iso8601()+ datetime.timedelta(seconds=10)
 
 print "t1",t1.strftime("%Y-%m-%d--%H:%M:%S")
 print "t2",t2.strftime("%Y-%m-%d--%H:%M:%S")
 print "t3",t3.strftime("%Y-%m-%d--%H:%M:%S")
 epoch=time.mktime(t3.timetuple())
 
-los=dateutils.to_iso8601()
-t4=dateutils.from_iso8601(los)
+los= dateutils.to_iso8601()
+t4= dateutils.from_iso8601(los)
 t5=t4+datetime.timedelta(seconds=15)
 print "t5",t5.strftime("%Y-%m-%d--%H:%M:%S")
 
