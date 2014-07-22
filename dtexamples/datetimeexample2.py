@@ -1,4 +1,10 @@
 __author__ = 'daokh'
+import datetime
+import time
+import pytz
+from time import gmtime
+import calendar
+import sys
 """
 time.strptime
 string --> tuple (no timezone applied, so matches string)
@@ -16,25 +22,27 @@ time.gmtime
 seconds since epoch --> tuple in UTC
 
 """
-import datetime
-import time
-import pytz
-from time import gmtime
-import calendar
 
 
-#dt = datetime.datetime.strptime('24052010', "%d%m%Y").date()
+# dt = datetime.datetime.strptime('24052010', "%d%m%Y").date()
 dt = datetime.datetime.strptime('01011970 00:00:00 UTC', "%d%m%Y %H:%M:%S %Z")
 tuple = dt.timetuple()
 
-
-ans_time = time.mktime(tuple)
-ans_time = calendar.timegm(tuple)
+localSeconds = time.mktime(tuple)
+UTCSeconds = calendar.timegm(tuple)
 
 dt = datetime.datetime.strptime('Jan 01, 1970 12:00:00 AM UTC', "%b %d, %Y %I:%M:%S %p %Z")
 tuple = dt.timetuple()
-ans_time = time.mktime(tuple)
-ans_time = calendar.timegm(tuple)
+localSeconds = time.mktime(tuple)
+UTCSeconds = calendar.timegm(tuple)
+
+localnow = time.time()
+gmtnow = time.gmtime()
+
+localString = datetime.datetime.fromtimestamp(int("0")).strftime('%Y-%m-%d %H:%M:%S')
+utcString = datetime.datetime.utcfromtimestamp(int("0")).strftime('%Y-%m-%d %H:%M:%S')
+humantime = datetime.datetime.fromtimestamp(localnow).strftime('%Y-%m-%d %H:%M:%S %Z')
+print
 
 localNow = datetime.datetime.now()
 utcNow = datetime.datetime.utcnow()
@@ -48,4 +56,5 @@ utcUnixTime = calendar.timegm(utcTuple)
 localString = localNow.strftime('%Y-%m-%d %H:%M:%S %Z')
 utcString = utcNow.strftime('%Y-%m-%d %H:%M:%S %Z')
 print
+
 
