@@ -15,6 +15,8 @@ local time tuple --> seconds since epoch (always local time)
 time.localtime
 seconds since epoch --> tuple in local timezone
 
+
+
 calendar.timegm
 tuple in UTC --> seconds since epoch
 
@@ -31,7 +33,7 @@ tuple = dt.timetuple()
 localSeconds = time.mktime(tuple)
 UTCSeconds = calendar.timegm(tuple)
 
-dt = datetime.datetime.strptime('Jan 01, 1970 12:00:00 AM UTC', "%b %d, %Y %I:%M:%S %p %Z")
+dt = datetime.datetime.strptime('Jan 01, 1970 12:00:30 AM UTC', "%b %d, %Y %I:%M:%S %p %Z")
 tuple = dt.timetuple()
 localSeconds = time.mktime(tuple)
 UTCSeconds = calendar.timegm(tuple)
@@ -52,9 +54,14 @@ utcTuple = utcNow.timetuple()
 
 localUnixTime = time.mktime(localTuple)
 utcUnixTime = calendar.timegm(utcTuple)
-
+uctUnixTime2 = time.time()
 localString = localNow.strftime('%Y-%m-%d %H:%M:%S %Z')
 utcString = utcNow.strftime('%Y-%m-%d %H:%M:%S %Z')
 print
 
+now=datetime.datetime.now()
+ts_epoch = calendar.timegm(datetime.datetime.utcnow().utctimetuple())
+strUtcDate = datetime.datetime.utcfromtimestamp(ts_epoch).strftime('%Y-%m-%dT%H:%M:%S%z')
+
+print strUtcDate
 
