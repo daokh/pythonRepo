@@ -26,8 +26,8 @@ now = dt.now(pytz.utc)
 t1 = dt.now(timezone("UTC"))
 t2 = t1 + datetime.timedelta(seconds=5)
 
-print dateutils.timestamp(t1)
-print dateutils.timestamp(t2)
+# print dateutils.timestamp(t1)
+# print dateutils.timestamp(t2)
 
 testdict = jsondict({})
 if testdict.radius: testdict.pop("radius")
@@ -111,7 +111,10 @@ querystr = querystr.replace("<ACTIVE_QUERY_STRING>",activeQuery)
 print querystr
 
 foo = dict ([("name", "fi"),("foo",33)])
+foo["flightNumber"] = 0
 print foo
+if "flightNumber" not in foo:
+    print
 
 items1 = [ {"key": "abc","notification": "a"},  {"key": "abc2","notification": "b"} ]
 items2 = [ {"key": "abc","notification": "aa"},  {"key": "abc2","notification": "bb"}, {"key": "abc3","notification": "bb"}  ]
@@ -121,6 +124,8 @@ for item in items1:
 for item in items2:
     notificationDitc[item["key"]]  = item["notification"]
 listitems = notificationDitc.items()
+apiCall = "/jsonapi/nodes/{nodeId}/devices/{deviceId}".format(3,3)
+
 
 data = [[1,33,3], [4,5,6], [7,8,9]]
 sorted_by_second = sorted(data, key=lambda tup: tup[1])
