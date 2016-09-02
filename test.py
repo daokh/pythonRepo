@@ -5,7 +5,11 @@ import pytz
 from time import gmtime
 import calendar
 mpes = ["hi", "foo", "bar", 'hid']
-
+try:
+    foo  = {}
+    foo["w"]
+except (KeyError, TypeError, ValueError):
+    print "error"
 for mpe in mpes:
     if(mpe == "hi"):
         mpes.remove(mpe)
@@ -47,5 +51,16 @@ dt = datetime.datetime.strptime('01011970 00:00:00 UTC', "%d%m%Y %H:%M:%S %Z")
 tuple = dt.timetuple()
 ans_time = time.mktime(tuple)
 ans_time = calendar.timegm(tuple)
+
+apiCall = "/jsonapi/nodes/{nodeId}/devices/{deviceId}".format(nodeId=3,deviceId=3)
 print
 
+
+foo = None
+foo = ""
+
+if not foo.strip():
+    print "yes"
+
+if str(foo).strip():
+    print "yes"
