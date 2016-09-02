@@ -1,0 +1,27 @@
+2014-04-08 10:34:00,487 : INFO : __main__ : adfadfSDF
+2014-04-08 16:51:20,163 : INFO : __main__ : adfadfSDF
+2014-04-08 16:51:54,184 : INFO : __main__ : adfadfSDF
+2014-04-08 17:13:21,210 : INFO : __main__ : adfadfSDF
+2014-04-08 17:15:35,421 : INFO : __main__ : adfadfSDF
+2014-04-08 17:25:08,096 : INFO : __main__ : adfadfSDF
+2014-04-16 11:12:15,019 : INFO : __main__ : adfadfSDF
+2014-04-16 11:12:39,017 : INFO : __main__ : adfadfSDF
+2014-04-16 11:12:46,657 : INFO : __main__ : adfadfSDF
+2014-04-16 11:12:58,875 : INFO : __main__ : adfadfSDF
+2014-04-16 11:13:23,515 : INFO : __main__ : adfadfSDF
+2014-04-16 11:22:43,736 : INFO : __main__ : adfadfSDF
+2014-04-16 11:22:58,813 : INFO : __main__ : adfadfSDF
+2014-04-17 15:59:36,335 : INFO : root : Shutting down thread pool
+2014-04-17 16:00:47,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:49,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:51,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:53,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:55,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:57,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:00:59,375 : INFO : __main__ : <bound method Scheduler.print_jobs of <apscheduler.scheduler.Scheduler object at 0x020E4E30>>
+2014-04-17 16:01:57,979 : INFO : __main__ : [<Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 2, 979000, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 7, 979000, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 7, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 12, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>]
+2014-04-17 16:01:59,979 : INFO : __main__ : [<Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 2, 979000, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 7, 979000, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 7, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 12, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>]
+2014-04-17 16:02:01,977 : INFO : __main__ : [<Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 2, 979000, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 7, 979000, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 7, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 12, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>]
+2014-04-17 16:02:03,977 : INFO : __main__ : [<Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 7, 979000, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 7, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 12, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>]
+2014-04-17 16:02:25,460 : INFO : __main__ : This is the main thread.
+2014-04-17 16:02:29,131 : INFO : __main__ : [<Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 32, 86000, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 23, 2, 32, tzinfo=<UTC>))>)>, <Job (name=print_event, trigger=<SimpleTrigger (run_date=datetime.datetime(2014, 4, 17, 16, 2, 37, tzinfo=<DstTzInfo 'America/Los_Angeles' PDT-1 day, 17:00:00 DST>))>)>]
