@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Update the details of an existing mission plan.",
+    "version": "0.1",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "ID of the mission plan to be updated.",
+            "type": "integer",
+            "required": true
+        },
+        "shortName": {
+            "description": "Optional new short name to create, update, or delete based on action supplied above.",
+            "type": "string"
+        },
+        "description": {
+            "description": "Optional new description.",
+            "type": "string"
+        },
+        "BACNTailNumber": {
+            "description": "Optional new BACN tail number.",
+            "type": "string"
+        },
+        "missionPlanElements": {
+            "description": "A single mission plan element.  Optionally contains a scheduleTrigger OR a geofenceTrigger but not both.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "description": "Action to be performed on this mission plan using data supplied in the fields below.",
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "create",
+                            "update",
+                            "delete"
+                        ]
+                    },
+                    "id": {
+                        "description": "ID of the mission plan element.  Uniquely identifies the mission plan element across all mission plans.",
+                        "type": "integer",
+                        "required": true
+                    },
+                    "scheduleTrigger": {
+                        "description": "Description of when to trigger the scheduled comm plan. Must contain either a a delta from the time the mission plan was activated or a triggerDate.",
+                        "type": "object",
+                        "properties": {
+                            "delta": {
+                                "description": "Number of seconds from the start of the mission to wait before triggering the comm plan(s) associated with this mission plan element.",
+                                "type": "number"
+                            },
+                            "triggerDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "ISO 8601 formatted date time string representing the exact time to trigger the comm plan(s) associated with this mission plan element."
+                            }
+                        }
+                    },
+                    "commPlanIDs": {
+                        "description": "Array of LNCS comm plan IDs triggered by this mission plan element.",
+                        "type": "array",
+                        "items": {
+                            "description": "LNCS comm plan ID.",
+                            "type": "number"
+                        }
+                    },
+                    "Notifications": {
+                        "description": "Array of notifications triggered by this mission plan element.",
+                        "type": "array",
+                        "items": {
+                            "description": "Notification.",
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "description": "The title of the notification.",
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "notificationText": {
+                                    "description": "The body of the notification text.",
+                                    "type": "string",
+                                    "required": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
