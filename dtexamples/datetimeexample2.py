@@ -65,3 +65,22 @@ strUtcDate = datetime.datetime.utcfromtimestamp(ts_epoch).strftime('%Y-%m-%dT%H:
 
 print strUtcDate
 
+
+################################################################
+
+dtuple = dt.utcnow()
+
+# samething
+tuple1 = dtuple.timetuple()
+tuple2 = dtuple.utctimetuple()
+
+now1 = calendar.timegm(tuple1)
+now2 = calendar.timegm(tuple2)
+
+str1 = dtuple.strftime('%Y-%m-%d %H:%M:%S')
+str2 =  time.strftime('%Y-%m-%d %H:%M:%S',time.gmtime(now1))
+
+
+print
+
+
